@@ -20,27 +20,13 @@ type Repository struct {
 	CommitsAYear      int
 }
 
-func GetRepo() int {
-	// var readFile struct {
-	// 	token string `json:"token"`
-	// }
-	owner := "facebook"
-	name := "react"
+func GetRepo(s []string) *Grades {
+	owner := s[0]
+	name := s[1]
 	ctx := context.Background()
 
-	// f, err := os.Open(".keys.json")
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// defer f.Close()
-	// dec := json.NewDecoder(f)
-
-	// dec.Decode(&readFile)
-
-	// fmt.Println(readFile.token)
-
 	tokenService := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: ""},
+		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
 	)
 	tokenClient := oauth2.NewClient(ctx, tokenService)
 

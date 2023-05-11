@@ -7,7 +7,18 @@ import (
 	"github.com/google/go-github/github"
 )
 
-func Rank(repoStats Repository) int {
+type Grades struct {
+	Star    int
+	Fork    int
+	Issue   int
+	Update  int
+	Watcher int
+	Prs     int
+	Commits int
+	Overall int
+}
+
+func Rank(repoStats Repository) *Grades {
 	starGrade := rateStars(repoStats.StarsCount)
 	forkGrade := rateForks(repoStats.ForksCount)
 	issuesGrade := rateIssues(repoStats.OpenIssuesCount)
@@ -26,7 +37,18 @@ func Rank(repoStats Repository) int {
 	fmt.Printf("prs: %d\n", prsGrade)
 	fmt.Printf("commits: %d\n", commitsGrade)
 
-	return average
+	ret := &Grades{
+		Star:    starGrade,
+		Fork:    forkGrade,
+		Issue:   issuesGrade,
+		Update:  updatedGrade,
+		Watcher: watchersGrade,
+		Prs:     prsGrade,
+		Commits: commitsGrade,
+		Overall: average,
+	}
+
+	return ret
 }
 
 func rateStars(starsCount int) int {
@@ -54,7 +76,6 @@ func rateStars(starsCount int) int {
 	default:
 		return 0
 	}
-	return 0
 }
 
 func rateForks(forkCount int) int {
@@ -82,7 +103,6 @@ func rateForks(forkCount int) int {
 	default:
 		return 0
 	}
-	return 0
 }
 
 func rateUpdated(lastTime github.Timestamp) int {
@@ -146,7 +166,6 @@ func rateIssues(issues int) int {
 	default:
 		return 0
 	}
-	return 0
 }
 
 func rateWatchers(watchers int) int {
@@ -174,7 +193,6 @@ func rateWatchers(watchers int) int {
 	default:
 		return 0
 	}
-	return 0
 }
 
 func rateCommits(count int) int {
