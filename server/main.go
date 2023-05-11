@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"repos"
 
 	"github.com/gofiber/fiber/v2"
@@ -24,7 +25,7 @@ func main() {
 
 	setupRoutes(app)
 
-	log.Fatal(app.Listen(":4000"))
+	log.Fatal(app.Listen(":" + os.Getenv("PORT")))
 }
 
 func setupRoutes(app *fiber.App) {
