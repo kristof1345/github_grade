@@ -20,7 +20,7 @@ type Repository struct {
 	CommitsAYear      int
 }
 
-func GetRepo(s []string) []Grades {
+func GetRepo(s []string) *Grades {
 	owner := s[0]
 	name := s[1]
 	ctx := context.Background()
