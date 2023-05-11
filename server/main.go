@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"repos"
@@ -43,6 +42,6 @@ func returnPostedData(c *fiber.Ctx) error {
 		prop.Name,
 	}
 	grade := repos.GetRepo(s)
-	fmt.Println(grade)
+
 	return c.JSON(grade)
 }

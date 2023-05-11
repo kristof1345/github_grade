@@ -18,7 +18,8 @@ type Grades struct {
 	Overall int
 }
 
-func Rank(repoStats Repository) *Grades {
+func Rank(repoStats Repository) []Grades {
+	ret := make([]Grades, 0)
 	starGrade := rateStars(repoStats.StarsCount)
 	forkGrade := rateForks(repoStats.ForksCount)
 	issuesGrade := rateIssues(repoStats.OpenIssuesCount)
@@ -37,7 +38,7 @@ func Rank(repoStats Repository) *Grades {
 	fmt.Printf("prs: %d\n", prsGrade)
 	fmt.Printf("commits: %d\n", commitsGrade)
 
-	ret := &Grades{
+	grades := &Grades{
 		Star:    starGrade,
 		Fork:    forkGrade,
 		Issue:   issuesGrade,
@@ -47,6 +48,8 @@ func Rank(repoStats Repository) *Grades {
 		Commits: commitsGrade,
 		Overall: average,
 	}
+
+	ret = append(ret, *grades)
 
 	return ret
 }
