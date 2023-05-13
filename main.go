@@ -18,7 +18,7 @@ func main() {
 	app := fiber.New()
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "https://opensourcegrader.vercel.app",
+		AllowOrigins: "https://opensourcegrader.vercel.app/",
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 
