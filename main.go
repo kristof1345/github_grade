@@ -17,10 +17,12 @@ type Props struct {
 func main() {
 	app := fiber.New()
 
-	app.Use(cors.New(cors.Config{
-		AllowOrigins: "https://opensourcegrader.vercel.app/",
-		AllowHeaders: "Origin, Content-Type, Accept",
-	}))
+	// app.Use(cors.New(cors.Config{
+	// 	AllowOrigins: "https://opensourcegrader.vercel.app",
+	// 	AllowHeaders: "Origin, Content-Type, Accept",
+	// }))
+
+	app.Use(cors.New())
 
 	setupRoutes(app)
 
